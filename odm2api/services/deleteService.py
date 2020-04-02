@@ -13,6 +13,7 @@ class DeleteODM2(serviceBase):
 
     def remove(self, obj):
         self._session.delete(obj)
+        self._session.commit()
 
 # CV
 # Core

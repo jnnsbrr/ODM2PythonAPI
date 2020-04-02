@@ -39,14 +39,13 @@ class Base(object):
 
     def __repr__(self):
         valuedict = self.__dict__.copy()
-        for v in valuedict.keys():
+        for v in list(valuedict):
             if 'obj' in v.lower():
                 del valuedict[v]
 
             if v == '_sa_instance_state':
                 del valuedict['_sa_instance_state']
         return '<%s(%s)>' % (self.__class__.__name__, str(valuedict))
-
 
 class modelBase():
     from sqlalchemy.ext.declarative import declarative_base

@@ -1,11 +1,11 @@
 from __future__ import (absolute_import, division, print_function)
 
-from odm2api.base import modelBase
 
 from sqlalchemy import BigInteger, Boolean, Column, Date, DateTime, Float, ForeignKey, Integer, String, case
 from sqlalchemy.dialects import mysql, postgresql, sqlite
 from sqlalchemy.orm import relationship
 
+from odm2api.base import modelBase
 Base = modelBase.Base
 
 BigIntegerType = BigInteger()
@@ -59,7 +59,7 @@ class CVDataQualityType(Base, CV):
 
 
 class CVDataSetType(Base, CV):
-    __tablename__ = 'cv_datasettypecv'
+    __tablename__ = 'cv_datasettype'
 
 
 class CVDeploymentType(Base, CV):
@@ -266,18 +266,18 @@ class SamplingFeatures(Base):
     """float: The elevation of the sampling feature in meters, or in the case of Specimen,
               the elevation from where the SamplingFeature.Specimen was collected"""  # noqa
     ElevationDatumCV = Column('elevationdatumcv', ForeignKey(CVElevationDatum.Name), index=True)
-    """str: The code for the vertical geodetic datum that specifies the zero point for 
+    """str: The code for the vertical geodetic datum that specifies the zero point for
             the Sampling Feature Elevation"""  # noqa
     # FeatureGeometry = Column('featuregeometry',  String(50))
-    """object: The location geometry of the sampling feature on the Earth expressed using a 
-                 geometry data type. Can be a Point, Curve (profile, trajectory, etc), 
-                 Surface (flat polygons, etc) or Solid/Volume (although often limited to 
+    """object: The location geometry of the sampling feature on the Earth expressed using a
+                 geometry data type. Can be a Point, Curve (profile, trajectory, etc),
+                 Surface (flat polygons, etc) or Solid/Volume (although often limited to
                  2D geometries). """  # noqa
 
     FeatureGeometryWKT = Column('featuregeometrywkt', String(50))
-    """str: The location geometry of the sampling feature on the Earth expressed as 
-              well known text (WKT). Can be a Point, Curve (profile, trajectory, etc.), 
-              Surface (flat polygons, etc.), or Solid/Volume (although often limited to 
+    """str: The location geometry of the sampling feature on the Earth expressed as
+              well known text (WKT). Can be a Point, Curve (profile, trajectory, etc.),
+              Surface (flat polygons, etc.), or Solid/Volume (although often limited to
               2D geometries)."""  # noqa
     __mapper_args__ = {
         'polymorphic_on': case(
